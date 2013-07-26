@@ -1,11 +1,11 @@
 <!---
 	rsa.cfc (https://github.com/ggfx/coldfusion-rsa)
-	Component for asymmetric key cryptograph using java security, it has three methods:
+	Component for asymmetric key cryptograph using java security, it has these methods:
 	-	 create_key_pair: creates a RSA key-pair, returns a struct with public and private key
 	-	 encrypt_string:  encrypts a text-string with public or private key (for private key provide parameter key_type='private') returns base64 encoded string
 	-	 decrypt_string:  decrypts a base64 string with public or private key (for public key provide parameter key_type='public') returns plain text-string
 
-	Can be used with BouncyCastleProvider e.g. http://www.bouncycastle.org/download/bcprov-jdk15on-149.zip
+	Can be used with BouncyCastleProvider e.g. http://www.bouncycastle.org/download/bcprov-jdk15on-149.jar
 	For BouncyCastle jar you have to use JavaLoader (https://github.com/markmandel/JavaLoader) as well
 
 	@Author	Cornelius Rittner
@@ -27,7 +27,7 @@
 					<cfset arguments.JavaLoader = ListDeleteAt(arguments.JavaLoader,ListLen(arguments.JavaLoader,"."),".")>
 				</cfif>
 				<cfset variables.JavaLoader = createObject("component",arguments.JavaLoader).init(ary_paths) />
-				<cfset this.bc = variables.JavaLoader.create("org.bouncycastle.jce.provider.BouncyCastleProvider")>
+				<cfset this.bc = variables.JavaLoader.create("org.bouncycastle.jce.provider.BouncyCastleProvider").init()>
 				<cfcatch>
 					<cfthrow message="JavaLoader or BouncyCastle failed to load" detail="#cfcatch.Detail#">
 				</cfcatch>
