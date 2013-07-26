@@ -153,6 +153,9 @@
 				<cfset local.spec	= createObject("java", "java.security.spec.PKCS8EncodedKeySpec").init(arguments.key) />
 				<cfset local.key	= local.key_factory.generatePrivate(local.spec) />
 
+			<cfelse>
+				<cfset local.key = "">
+
 			</cfif>
 
 		<cfreturn local.key />
